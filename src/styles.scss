@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+	margin: 0;
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 100;
+	font-style: normal;
+	font-variation-settings: "slnt" 0;
+}
+body {
+	background-image: url(./assets/img/FondoConversorDeMoneda.jpeg);
+	color: white;
+}

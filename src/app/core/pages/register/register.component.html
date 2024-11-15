@@ -1,1 +1,90 @@
-<p>register works!</p>
+<h1 class="title">Coiner</h1>
+<form #form="ngForm" (ngSubmit)="register(form)" class="reg-form">
+	<h2>Sign up</h2>
+	<input
+		type="email"
+		placeholder="Email"
+		required
+		minlength="10"
+		maxlength="35"
+		name="email"
+		[(ngModel)]="userForCreation.email"
+		#email="ngModel"
+	/>
+	<div
+		*ngIf="email.invalid && (email.dirty || email.touched)"
+		class="myerror"
+	>
+		<p *ngIf="email.errors?.['required']">El correo es obligatorio.</p>
+		<p *ngIf="email.errors?.['minlength']">
+			El correo debe tener al menos 10 caracteres.
+		</p>
+		<p *ngIf="email.errors?.['maxlength']">
+			El correo debe tener como máximo 35 caracteres.
+		</p>
+	</div>
+	<input
+		type="text"
+		placeholder="Username"
+		required
+		minlength="2"
+		maxlength="25"
+		name="username"
+		[(ngModel)]="userForCreation.username"
+		#username="ngModel"
+	/>
+	<div
+		*ngIf="username.invalid && (username.dirty || username.touched)"
+		class="myerror"
+	>
+		<p *ngIf="username.errors?.['required']">
+			El nombre de usuario es obligatorio.
+		</p>
+		<p *ngIf="username.errors?.['minlength']">
+			El nombre de usuario debe tener al menos 2 caracteres.
+		</p>
+		<p *ngIf="username.errors?.['maxlength']">
+			El nombre de usuario debe tener como máximo 25 caracteres.
+		</p>
+	</div>
+	<input
+		type="password"
+		placeholder="Ingrese password del usuario"
+		required
+		minlength="6"
+		maxlength="64"
+		name="password"
+		[(ngModel)]="userForCreation.password"
+		#passwordField="ngModel"
+	/>
+	<div
+		*ngIf="
+			passwordField.invalid &&
+			(passwordField.dirty || passwordField.touched)
+		"
+		class="myerror"
+	>
+		<p *ngIf="passwordField.errors?.['required']">
+			La contraseña es obligatoria.
+		</p>
+		<p *ngIf="passwordField.errors?.['minlength']">
+			La contraseña debe tener al menos 6 caracteres.
+		</p>
+		<p *ngIf="passwordField.errors?.['maxlength']">
+			La contraseña debe tener máximo 64 caracteres.
+		</p>
+	</div>
+	<button type="submit" [disabled]="cargando()">
+		{{ cargando() ? "Cargando..." : "Sign up" }}
+	</button>
+	<p *ngIf="errorRegister()" class="myerror">
+		Error al registrarse. Por favor, intenta nuevamente.
+	</p>
+
+	<p class="signin-text">
+		Already have an account?
+		<a class="signin-button" routerLink="/login" routerLinkActive="active"
+			>Sign in</a
+		>
+	</p>
+</form>

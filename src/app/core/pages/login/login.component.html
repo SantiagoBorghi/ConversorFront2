@@ -1,1 +1,31 @@
-<p>login works!</p>
+<h1 class="title">Coiner</h1>
+<form class="login-form" #form="ngForm" (ngSubmit)="login()">
+	<h2>Sign in</h2>
+	<input
+		type="email"
+		name="user"
+		id="user"
+		[(ngModel)]="loginData.email"
+		#user="ngModel"
+		placeholder="Email"
+		[required]="true"
+	/>
+	<p *ngIf="user.invalid && (user.dirty || user.touched)" class="error">
+		Este campo es requerido
+	</p>
+	<input
+		type="password"
+		name="password"
+		[required]="true"
+		placeholder="Contraseña"
+		minlength="6"
+		[(ngModel)]="loginData.password"
+		#password="ngModel"
+	/>
+	<button type="submit">Sign in</button>
+	<p *ngIf="errorLogin()" class="myerror">Error al iniciar sesion</p>
+	<p class="login-text">
+		Dont have an account?
+		<a class="signup-button" routerLink="">Sign up</a>
+	</p>
+</form>
