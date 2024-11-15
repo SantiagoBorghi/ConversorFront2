@@ -1,0 +1,118 @@
+.title-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem;
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	.title {
+		font-size: 2.5rem;
+		letter-spacing: 20px;
+		padding-left: 10px;
+		flex-grow: 1;
+	}
+	.LogOut {
+		background: hsla(0, 0%, 0%, 0.514);
+		border-radius: 10px;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		color: white;
+		font-size: 1rem;
+		font-weight: 700;
+		width: auto;
+		padding: 0 15px;
+		height: 35px;
+		margin: 0 10px;
+	}
+}
+
+.main {
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	margin: 1rem;
+	text-align: center;
+}
+
+.input-container,
+.result-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.input-container input,
+.result-container p {
+	text-align: left;
+	padding-left: 10px;
+	margin: 0;
+}
+
+#convertInput {
+	padding: 3px;
+	border: 2px solid #18473b83;
+	background: rgba(255, 255, 255, 0.404);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	width: calc(
+		50% - 1rem
+	); /* Ajusta el ancho del input para que se alinee con el selector */
+	height: 35px;
+	text-indent: 10px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	font-weight: 1000;
+	&:focus {
+		outline: none;
+	}
+}
+
+.currencyMenu {
+	background: rgba(255, 255, 255, 0.404);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 20%;
+	height: 44px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	font-weight: 1000;
+	&:focus {
+		outline: none;
+	}
+}
+
+.result-container p {
+	width: calc(50% - 1rem);
+	height: 44px;
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.404);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 2px solid #18473b83;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	text-indent: 10px;
+	color: black; /* Cambia el color del texto a negro */
+}
+
+.convertButton {
+	background: hsla(0, 0%, 0%, 0.514);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 35%;
+	height: 45px;
+	margin: 1rem;
+	color: white;
+	font-size: 1rem;
+	font-weight: 700;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}

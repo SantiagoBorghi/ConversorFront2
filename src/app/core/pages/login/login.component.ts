@@ -31,7 +31,7 @@ export class LoginComponent {
 		if (subscriptionStatus == "No subscription") {
 			this.router.navigate(["/subscription-options"]);
 		} else {
-			this.router.navigate(["/Home"]);
+			this.router.navigate(["/home"]);
 		}
 	}
 	login() {

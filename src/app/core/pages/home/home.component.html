@@ -1,1 +1,64 @@
-<p>home works!</p>
+<header class="title-container">
+	<h1 class="title">Coiner</h1>
+	<button class="LogOut">LogOut</button>
+</header>
+<div class="main">
+	<form (ngSubmit)="convertCurrency()">
+		<div class="input-container">
+			<input
+				id="convertInput"
+				type="number"
+				placeholder="Enter a number"
+				[(ngModel)]="amount"
+				name="amount"
+			/>
+			<select
+				class="currencyMenu"
+				[(ngModel)]="selectedCurrencyFrom"
+				name="selectedCurrencyFrom"
+			>
+				<option
+					*ngFor="let currency of currencies"
+					[value]="currency.code"
+				>
+					{{ currency.symbol }} {{ currency.code }}
+				</option>
+			</select>
+		</div>
+		<h3>Converted Value</h3>
+		<div class="output-container">
+			<div class="result-container">
+				<p id="convertInput">$ {{ convertedValue1 }}</p>
+				<select
+					class="currencyMenu"
+					[(ngModel)]="selectedCurrencyTo1"
+					name="selectedCurrencyTo1"
+				>
+					<option
+						*ngFor="let currency of currencies"
+						[value]="currency.code"
+					>
+						{{ currency.symbol }} {{ currency.code }}
+					</option>
+				</select>
+			</div>
+
+			<div class="result-container">
+				<p id="convertInput">$ {{ convertedValue2 }}</p>
+				<select
+					class="currencyMenu"
+					[(ngModel)]="selectedCurrencyTo2"
+					name="selectedCurrencyTo2"
+				>
+					<option
+						*ngFor="let currency of currencies"
+						[value]="currency.code"
+					>
+						{{ currency.symbol }} {{ currency.code }}
+					</option>
+				</select>
+			</div>
+		</div>
+		<button class="convertButton" type="submit">Convert</button>
+	</form>
+</div>
