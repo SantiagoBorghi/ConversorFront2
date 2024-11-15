@@ -98,4 +98,10 @@ export class UserService extends ApiService {
 		});
 		return res;
 	}
+
+	async getConvertCount() {
+		const res = await this.getAuth("subscription/GetConvertCount");
+		const resJson = await res.json();
+		return resJson;
+	}
 }

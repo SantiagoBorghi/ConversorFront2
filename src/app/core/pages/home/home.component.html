@@ -1,22 +1,26 @@
 <header class="title-container">
 	<h1 class="title">Coiner</h1>
-	<button class="LogOut">LogOut</button>
+	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
 <div class="main">
-	<form (ngSubmit)="convertCurrency()">
+	<form (ngSubmit)="convertCurrency()" class="conversion-form">
 		<div class="input-container">
 			<input
 				id="convertInput"
 				type="number"
-				placeholder="Enter a number"
+				placeholder="Enter a number to convert"
 				[(ngModel)]="amount"
 				name="amount"
+				required
+				min="0"
 			/>
 			<select
 				class="currencyMenu"
 				[(ngModel)]="selectedCurrencyFrom"
 				name="selectedCurrencyFrom"
+				required
 			>
+				<option value="" disabled selected>Coin</option>
 				<option
 					*ngFor="let currency of currencies"
 					[value]="currency.code"
@@ -33,7 +37,9 @@
 					class="currencyMenu"
 					[(ngModel)]="selectedCurrencyTo1"
 					name="selectedCurrencyTo1"
+					required
 				>
+					<option value="" disabled selected>Coin</option>
 					<option
 						*ngFor="let currency of currencies"
 						[value]="currency.code"
@@ -49,7 +55,9 @@
 					class="currencyMenu"
 					[(ngModel)]="selectedCurrencyTo2"
 					name="selectedCurrencyTo2"
+					required
 				>
+					<option value="" disabled selected>Coin</option>
 					<option
 						*ngFor="let currency of currencies"
 						[value]="currency.code"
@@ -59,6 +67,14 @@
 				</select>
 			</div>
 		</div>
-		<button class="convertButton" type="submit">Convert</button>
+		<button class="convertButton" type="submit" [disabled]="loading()">
+			{{ loading() ? "Convirtiendo..." : "Convertir" }}
+		</button>
+		<div class="convert-count">
+			<p>{{ convertCount }} left.</p>
+		</div>
+		<div *ngIf="error()" class="error-message">
+			{{ error() }}
+		</div>
 	</form>
 </div>
