@@ -3,7 +3,6 @@ import {
 	WritableSignal,
 	inject,
 	signal,
-	Inject,
 	PLATFORM_ID,
 } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
@@ -25,7 +24,7 @@ export class AuthService {
 		}
 	}
 
-	async login(loginData: LoginData) {
+	async login(loginData: LoginData): Promise<boolean> {
 		try {
 			const res = await fetch(`${API}authentication/authenticate`, {
 				method: "POST",

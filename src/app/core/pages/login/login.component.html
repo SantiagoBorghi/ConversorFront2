@@ -3,32 +3,41 @@
 	<h2>Sign in</h2>
 	<input
 		type="email"
-		name="user"
-		id="user"
+		name="email"
+		id="email"
 		[(ngModel)]="loginData.email"
-		#user="ngModel"
+		#email="ngModel"
 		placeholder="Email"
-		[required]="true"
+		required
+		minlength="7"
 	/>
-	<p *ngIf="user.invalid && (user.dirty || user.touched)" class="error">
-		Este campo es requerido
+	<p *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+		Este campo es requerido.
 	</p>
 	<input
 		type="password"
 		name="password"
-		[required]="true"
-		placeholder="Contraseña"
-		minlength="6"
 		[(ngModel)]="loginData.password"
 		#password="ngModel"
+		placeholder="Contraseña"
+		required
+		minlength="6"
 	/>
+	<p
+		*ngIf="password.invalid && (password.dirty || password.touched)"
+		class="error"
+	>
+		La contraseña es obligatoria y debe tener minimo 6 caracteres.
+	</p>
 	<button type="submit" [disabled]="cargando()">
 		<span *ngIf="!cargando()">Sign in</span>
 		<span *ngIf="cargando()">
 			<span class="spinner"></span> Cargando...
 		</span>
 	</button>
-	<p *ngIf="errorLogin()" class="myerror">Error al iniciar sesion</p>
+	<p *ngIf="errorLogin()" class="myerror">
+		Error al iniciar sesión. Por favor, verifica tus credenciales.
+	</p>
 	<p class="login-text">
 		Dont have an account?
 		<a class="signup-button" routerLink="/register">Sign up</a>

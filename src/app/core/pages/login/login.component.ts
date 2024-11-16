@@ -1,4 +1,4 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, inject, signal, WritableSignal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Router } from "@angular/router";
@@ -18,32 +18,46 @@ export class LoginComponent {
 	private userService = inject(UserService);
 	private router = inject(Router);
 
-	errorLogin = signal(false);
-	cargando = signal(false);
+	errorLogin: WritableSignal<boolean> = signal(false);
+	cargando: WritableSignal<boolean> = signal(false);
 
 	loginData: LoginData = {
 		email: "",
 		password: "",
 	};
-	async SubCheck() {
-		const subscriptionStatus = await this.userService.getSub();
-		console.log(subscriptionStatus); // Solo se llama una vez a getSub()
-		if (subscriptionStatus == "No subscription") {
-			this.router.navigate(["/subscription-options"]);
-		} else {
+	async SubCheck(): Promise<void> {
+		try {
+			const subscriptionStatus = await this.userService.getSub();
+			console.log(subscriptionStatus); // Solo se llama una vez a getSub()
+			if (subscriptionStatus === "No subscription") {
+				this.router.navigate(["/subscription-options"]);
+			} else {
+				this.router.navigate(["/home"]);
+			}
+		} catch (error) {
+			console.error(
+				"Error al verificar el estado de la suscripción:",
+				error
+			);
 			this.router.navigate(["/home"]);
 		}
 	}
-	login() {
+
+	async login(): Promise<void> {
 		this.errorLogin.set(false);
 		this.cargando.set(true);
-		this.authService.login(this.loginData).then(async (res) => {
+		try {
+			const res = await this.authService.login(this.loginData);
 			if (res) {
 				await this.SubCheck();
 			} else {
 				this.errorLogin.set(true);
 			}
+		} catch (err) {
+			console.warn("Error al iniciar sesión", err);
+			this.errorLogin.set(true);
+		} finally {
 			this.cargando.set(false);
-		});
+		}
 	}
 }
