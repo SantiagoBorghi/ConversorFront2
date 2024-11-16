@@ -33,11 +33,13 @@ export class HomeComponent {
 	loading: WritableSignal<boolean> = signal(false);
 	error: WritableSignal<string | null> = signal(null);
 	convertCount: number = 0;
+	subscription: string = "";
 
 	ngOnInit() {
 		this.loadCurrencies();
 		this.loadConvertCount();
 		this.checkAdminStatus();
+		this.getSub();
 	}
 
 	private async checkAdminStatus(): Promise<void> {
@@ -135,6 +137,17 @@ export class HomeComponent {
 			);
 		} finally {
 			this.loading.set(false);
+		}
+	}
+
+	async getSub(): Promise<void> {
+		try {
+			const sub = await this.userService.getSub();
+			this.subscription = sub; // Almacenar la suscripción
+			console.log("Suscripción:", sub);
+		} catch (error) {
+			console.error("Error al obtener la suscripción:", error);
+			this.subscription = "Sin suscripción";
 		}
 	}
 

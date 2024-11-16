@@ -14,6 +14,17 @@
 		padding-left: 10px;
 		flex-grow: 1;
 	}
+	.subscription-container {
+		background: linear-gradient(45deg, #6a11cb, #2575fc);
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+	}
+
+	.subscription-text {
+		color: #ffffff;
+		font-weight: bold;
+		margin: 0;
+	}
 	.LogOut {
 		background: hsla(0, 0%, 0%, 0.514);
 		border-radius: 10px;
