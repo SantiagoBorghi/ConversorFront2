@@ -27,7 +27,7 @@ export class SubscriptionOptionsComponent {
 				this.SubscriptionUpdate
 			);
 			if (res.ok) {
-				this.router.navigate(["/Home"]);
+				this.router.navigate(["/home"]);
 			}
 		} catch (err) {
 			console.warn("Error updating subscription", err);

@@ -82,11 +82,6 @@ export class UserService extends ApiService {
 		return res;
 	}
 
-	async isAdmin(): Promise<boolean> {
-		const res = await this.getAuth("User/IsAdmin/${UserId}");
-		return res.ok;
-	}
-
 	async updateSubscription(newSubscriptionId: SubscriptionData) {
 		const res = await fetch(API + `User/updateSubscription`, {
 			method: "PUT",
@@ -103,5 +98,27 @@ export class UserService extends ApiService {
 		const res = await this.getAuth("subscription/GetConvertCount");
 		const resJson = await res.json();
 		return resJson;
+	}
+
+	async getRole() {
+		const res = await this.getAuth("User/GetRole");
+		const resText = await res.text();
+		console.log("getRole response:", resText);
+		return resText;
+	}
+
+	async isAdmin() {
+		try {
+			const res = await this.getAuth("User/GetRole");
+			const resText = await res.text();
+			if (resText === "ADMIN") {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			console.error("Error al verificar el rol de administrador:", error);
+			return false;
+		}
 	}
 }

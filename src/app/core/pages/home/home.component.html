@@ -70,11 +70,16 @@
 		<button class="convertButton" type="submit" [disabled]="loading()">
 			{{ loading() ? "Convirtiendo..." : "Convertir" }}
 		</button>
-		<div class="convert-count">
-			<p>{{ convertCount }} left.</p>
-		</div>
 		<div *ngIf="error()" class="error-message">
 			{{ error() }}
 		</div>
 	</form>
+	<button class="admin-button" *ngIf="isAdmin" routerLink="/admin-panel">
+		Admin Panel
+	</button>
+	<div class="convert-count">
+		<p>
+			{{ convertCount > 995 ? "Unlimited uses" : convertCount + " left" }}
+		</p>
+	</div>
 </div>

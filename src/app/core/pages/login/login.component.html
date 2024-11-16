@@ -22,7 +22,12 @@
 		[(ngModel)]="loginData.password"
 		#password="ngModel"
 	/>
-	<button type="submit">Sign in</button>
+	<button type="submit" [disabled]="cargando()">
+		<span *ngIf="!cargando()">Sign in</span>
+		<span *ngIf="cargando()">
+			<span class="spinner"></span> Cargando...
+		</span>
+	</button>
 	<p *ngIf="errorLogin()" class="myerror">Error al iniciar sesion</p>
 	<p class="login-text">
 		Dont have an account?

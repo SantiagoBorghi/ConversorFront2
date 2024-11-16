@@ -1,5 +1,6 @@
-import { CommonModule } from "@angular/common";
 import { Component, inject, signal, WritableSignal } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
 import { CurrencyService } from "../../services/currency-service.service";
 import { AuthService } from "../../services/auth-service.service";
 import { UserService } from "../../services/user-service.service";
@@ -9,7 +10,7 @@ import { FormsModule } from "@angular/forms";
 @Component({
 	selector: "app-home",
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, RouterModule],
 	templateUrl: "./home.component.html",
 	styleUrls: ["./home.component.scss"],
 })
@@ -17,6 +18,8 @@ export class HomeComponent {
 	private currencyService = inject(CurrencyService);
 	private authService = inject(AuthService);
 	private userService = inject(UserService);
+
+	isAdmin: boolean = false;
 
 	currencies: Currency[] = [];
 	selectedCurrencyFrom: string = ""; // Moneda a convertir
@@ -34,6 +37,17 @@ export class HomeComponent {
 	ngOnInit() {
 		this.loadCurrencies();
 		this.loadConvertCount();
+		this.checkAdminStatus();
+	}
+
+	private async checkAdminStatus(): Promise<void> {
+		try {
+			const role = await this.userService.getRole();
+			this.isAdmin = role === "ADMIN";
+		} catch (error) {
+			console.error("Error al verificar el rol de administrador:", error);
+			this.isAdmin = false;
+		}
 	}
 
 	private async loadCurrencies(): Promise<void> {
