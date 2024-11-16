@@ -2,13 +2,13 @@ import { Component, inject } from "@angular/core";
 import { AuthService } from "../../services/auth-service.service";
 
 @Component({
-	selector: "app-admin-panel",
+	selector: "app-currencies-ic",
 	standalone: true,
 	imports: [],
-	templateUrl: "./admin-panel.component.html",
-	styleUrls: ["./admin-panel.component.scss"],
+	templateUrl: "./currencies-ic.component.html",
+	styleUrls: ["./currencies-ic.component.scss"],
 })
-export class AdminPanelComponent {
+export class CurrenciesICComponent {
 	private authService = inject(AuthService);
 
 	logout(): void {
