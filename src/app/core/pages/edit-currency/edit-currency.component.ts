@@ -25,6 +25,7 @@ export class EditCurrencyComponent implements OnInit {
 	error: string | null = null;
 
 	editingField: string | null = null;
+	saveStatus: { [key: string]: "success" | "error" | null } = {};
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
@@ -85,15 +86,24 @@ export class EditCurrencyComponent implements OnInit {
 				.updateCurrency(this.currency)
 				.then(() => {
 					this.editingField = null;
+					this.saveStatus[fieldName] = "success";
+					setTimeout(() => {
+						this.saveStatus[fieldName] = null;
+					}, 3000);
 				})
 				.catch((err) => {
 					this.error = `Error al actualizar ${fieldName}.`;
+					this.saveStatus[fieldName] = "error";
+					setTimeout(() => {
+						this.saveStatus[fieldName] = null;
+					}, 3000);
 				});
 		}
 	}
 
 	cancelEdit(): void {
 		this.editingField = null;
+		this.saveStatus = {};
 		if (this.currencyId) {
 			this.fetchCurrency(this.currencyId);
 		}

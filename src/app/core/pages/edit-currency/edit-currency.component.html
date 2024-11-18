@@ -55,6 +55,18 @@
 						</button>
 					</div>
 				</ng-template>
+				<div
+					class="confirmation-message"
+					*ngIf="saveStatus['name'] === 'success'"
+				>
+					✔️ Cambio guardado exitosamente.
+				</div>
+				<div
+					class="confirmation-message error"
+					*ngIf="saveStatus['name'] === 'error'"
+				>
+					❌ Error al guardar el cambio.
+				</div>
 			</div>
 
 			<!-- Campo Código -->
@@ -102,6 +114,18 @@
 						</button>
 					</div>
 				</ng-template>
+				<div
+					class="confirmation-message"
+					*ngIf="saveStatus['code'] === 'success'"
+				>
+					✔️ Cambio guardado exitosamente.
+				</div>
+				<div
+					class="confirmation-message error"
+					*ngIf="saveStatus['code'] === 'error'"
+				>
+					❌ Error al guardar el cambio.
+				</div>
 			</div>
 
 			<!-- Campo Símbolo -->
@@ -149,6 +173,18 @@
 						</button>
 					</div>
 				</ng-template>
+				<div
+					class="confirmation-message"
+					*ngIf="saveStatus['symbol'] === 'success'"
+				>
+					✔️ Cambio guardado exitosamente.
+				</div>
+				<div
+					class="confirmation-message error"
+					*ngIf="saveStatus['symbol'] === 'error'"
+				>
+					❌ Error al guardar el cambio.
+				</div>
 			</div>
 
 			<!-- Campo IC -->
@@ -201,13 +237,22 @@
 						</button>
 					</div>
 				</ng-template>
+				<div
+					class="confirmation-message"
+					*ngIf="saveStatus['ConvertibilityIndex'] === 'success'"
+				>
+					✔️ Cambio guardado exitosamente.
+				</div>
+				<div
+					class="confirmation-message error"
+					*ngIf="saveStatus['ConvertibilityIndex'] === 'error'"
+				>
+					❌ Error al guardar el cambio.
+				</div>
 			</div>
 
 			<!-- Botones Generales -->
 			<div class="button-group">
-				<button type="submit" class="save-all">
-					Guardar Todos los Cambios
-				</button>
 				<button type="button" class="cancel-all" (click)="cancel()">
 					Cancelar
 				</button>
