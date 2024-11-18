@@ -108,4 +108,25 @@ export class EditCurrencyComponent implements OnInit {
 			this.fetchCurrency(this.currencyId);
 		}
 	}
+
+	deleteCurrency(): void {
+		if (this.currencyId) {
+			if (confirm("¿Está seguro de que desea eliminar esta moneda?")) {
+				this.loading = true;
+				this.currencyService
+					.deleteCurrency(this.currencyId)
+					.then(() => {
+						this.loading = false;
+						this.router.navigate(["/currency-ic"]);
+					})
+					.catch((err) => {
+						this.loading = false;
+						this.error = "Error al eliminar la moneda.";
+						console.error(err);
+					});
+			}
+		} else {
+			this.error = "ID de moneda inválido.";
+		}
+	}
 }

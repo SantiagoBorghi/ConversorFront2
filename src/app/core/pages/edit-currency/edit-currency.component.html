@@ -253,6 +253,14 @@
 
 			<!-- Botones Generales -->
 			<div class="button-group">
+				<button
+					type="button"
+					class="delete-button"
+					(click)="deleteCurrency()"
+					[disabled]="loading"
+				>
+					Eliminar Moneda
+				</button>
 				<button type="button" class="cancel-all" (click)="cancel()">
 					Go back
 				</button>

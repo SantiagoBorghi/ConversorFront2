@@ -53,6 +53,16 @@ export class CurrencyService extends ApiService {
 		});
 	}
 
+	async deleteCurrency(id: number): Promise<void> {
+		await fetch(API + `Currency/DeleteCurrency/${id}`, {
+			method: "DELETE",
+			headers: {
+				"Content-type": "application/json",
+				Authorization: "Bearer " + this.auth.token(),
+			},
+		});
+	}
+
 	async ConvertCurrency(
 		amount: number,
 		ICfromConvert: number,
