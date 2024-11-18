@@ -42,6 +42,17 @@ export class CurrencyService extends ApiService {
 		});
 	}
 
+	async addCurrency(currency: Currency): Promise<void> {
+		await fetch(API + "Currency/CreateCurrency", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+				Authorization: "Bearer " + this.auth.token(),
+			},
+			body: JSON.stringify(currency),
+		});
+	}
+
 	async ConvertCurrency(
 		amount: number,
 		ICfromConvert: number,

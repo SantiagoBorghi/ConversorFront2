@@ -45,6 +45,10 @@ export class CurrenciesICComponent implements OnInit {
 		this.router.navigate(["/login"]);
 	}
 
+	goBack(): void {
+		this.router.navigate(["/home"]);
+	}
+
 	editCurrency(currency: Currency): void {
 		this.router.navigate([`/edit-currency/${currency.id}`]);
 	}

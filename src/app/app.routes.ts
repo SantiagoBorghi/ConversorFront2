@@ -5,6 +5,7 @@ import { HomeComponent } from "./core/pages/home/home.component";
 import { CurrenciesICComponent } from "./core/pages/currencies-ic/currencies-ic.component";
 import { SubscriptionOptionsComponent } from "./core/pages/subscription-options/subscription-options.component";
 import { EditCurrencyComponent } from "./core/pages/edit-currency/edit-currency.component";
+import { AddCurrencyComponent } from "./core/pages/add-currency/add-currency.component";
 import { AdminGuard } from "./core/guards/admin.guard";
 
 export const routes: Routes = [
@@ -19,6 +20,11 @@ export const routes: Routes = [
 	{
 		path: "edit-currency/:id",
 		component: EditCurrencyComponent,
+		canActivate: [AdminGuard],
+	},
+	{
+		path: "add-currency",
+		component: AddCurrencyComponent,
 		canActivate: [AdminGuard],
 	},
 	{ path: "subscription-options", component: SubscriptionOptionsComponent },

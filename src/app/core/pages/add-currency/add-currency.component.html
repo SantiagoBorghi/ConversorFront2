@@ -1,0 +1,69 @@
+<!-- src/app/core/pages/add-currency/add-currency.component.html -->
+<header class="title-container">
+	<a routerLink="/home" class="title-link">
+		<h1 class="title">Coiner</h1>
+	</a>
+	<button class="LogOut" (click)="logout()">Log out</button>
+</header>
+<div class="main-section">
+	<h3 class="main-section-title">Add New Currency</h3>
+	<form (ngSubmit)="addCurrency()" class="add-currency-form">
+		<div class="form-group">
+			<label for="name">Nombre:</label>
+			<input
+				id="name"
+				type="text"
+				[(ngModel)]="currency.name"
+				name="name"
+				required
+				placeholder="Enter currency name"
+			/>
+		</div>
+		<div class="form-group">
+			<label for="code">Código:</label>
+			<input
+				id="code"
+				type="text"
+				[(ngModel)]="currency.code"
+				name="code"
+				required
+				maxlength="5"
+				placeholder="Enter currency code"
+			/>
+		</div>
+		<div class="form-group">
+			<label for="symbol">Símbolo:</label>
+			<input
+				id="symbol"
+				type="text"
+				[(ngModel)]="currency.symbol"
+				name="symbol"
+				required
+				maxlength="3"
+				placeholder="Enter currency symbol"
+			/>
+		</div>
+		<div class="form-group">
+			<label for="ic">IC:</label>
+			<input
+				id="ic"
+				type="number"
+				[(ngModel)]="currency.ic"
+				name="ic"
+				required
+				min="0"
+				placeholder="Enter convertibility index"
+			/>
+		</div>
+		<button type="submit" class="submit-button" [disabled]="loading">
+			<i *ngIf="loading" class="fas fa-spinner fa-spin"></i>
+			{{ loading ? "Adding..." : "Add Currency" }}
+		</button>
+	</form>
+	<div *ngIf="successMessage" class="confirmation-message">
+		✔️ Moneda agregada exitosamente.
+	</div>
+	<div *ngIf="errorMessage" class="confirmation-message error">
+		❌ Error al agregar la moneda.
+	</div>
+</div>

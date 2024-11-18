@@ -1,8 +1,13 @@
 <header class="title-container">
-	<h1 class="title">Coiner</h1>
+	<a routerLink="/home" class="title-link">
+		<h1 class="title">Coiner</h1>
+	</a>
 	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
 <div class="main-section">
+	<button class="back-button" (click)="goBack()" aria-label="Volver atrás">
+		<i class="fas fa-arrow-left"></i>
+	</button>
 	<h3 class="main-section-title">Currencies ICs</h3>
 	<div class="cards-container" *ngIf="!loading && !error">
 		<div class="currency-card" *ngFor="let currency of currencies">
@@ -26,5 +31,8 @@
 	<div *ngIf="error" class="error-message">
 		<p>{{ error }}</p>
 	</div>
+	<button class="add-currency-button" routerLink="/add-currency">
+		Add Currency
+	</button>
 	<button class="return-button" routerLink="/home">Return</button>
 </div>
