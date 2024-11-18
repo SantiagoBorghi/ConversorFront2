@@ -11,10 +11,13 @@
 	</div>
 	<div *ngIf="currency" class="edit-form">
 		<form (ngSubmit)="saveChanges()">
+			<!-- Campo Nombre -->
 			<div class="form-group">
 				<label for="name">Nombre:</label>
-				<!-- Modo de Edición para Nombre -->
-				<div *ngIf="editingField === 'name'; else displayName">
+				<div
+					*ngIf="editingField === 'name'; else displayName"
+					class="editable-field"
+				>
 					<input
 						id="name"
 						type="text"
@@ -40,21 +43,27 @@
 					</div>
 				</div>
 				<ng-template #displayName>
-					<span>{{ currency.name }}</span>
-					<button
-						type="button"
-						(click)="editField('name')"
-						class="edit-button"
-					>
-						<i class="fas fa-edit"></i> Editar
-					</button>
+					<div class="value-container">
+						<span>{{ currency.name }}</span>
+						<button
+							type="button"
+							(click)="editField('name')"
+							class="edit-button"
+							aria-label="Editar Nombre"
+						>
+							<i class="fas fa-edit"></i>
+						</button>
+					</div>
 				</ng-template>
 			</div>
 
+			<!-- Campo Código -->
 			<div class="form-group">
 				<label for="code">Código:</label>
-				<!-- Modo de Edición para Código -->
-				<div *ngIf="editingField === 'code'; else displayCode">
+				<div
+					*ngIf="editingField === 'code'; else displayCode"
+					class="editable-field"
+				>
 					<input
 						id="code"
 						type="text"
@@ -81,21 +90,27 @@
 					</div>
 				</div>
 				<ng-template #displayCode>
-					<span>{{ currency.code }}</span>
-					<button
-						type="button"
-						(click)="editField('code')"
-						class="edit-button"
-					>
-						<i class="fas fa-edit"></i> Editar
-					</button>
+					<div class="value-container">
+						<span>{{ currency.code }}</span>
+						<button
+							type="button"
+							(click)="editField('code')"
+							class="edit-button"
+							aria-label="Editar Código"
+						>
+							<i class="fas fa-edit"></i>
+						</button>
+					</div>
 				</ng-template>
 			</div>
 
+			<!-- Campo Símbolo -->
 			<div class="form-group">
 				<label for="symbol">Símbolo:</label>
-				<!-- Modo de Edición para Símbolo -->
-				<div *ngIf="editingField === 'symbol'; else displaySymbol">
+				<div
+					*ngIf="editingField === 'symbol'; else displaySymbol"
+					class="editable-field"
+				>
 					<input
 						id="symbol"
 						type="text"
@@ -122,30 +137,34 @@
 					</div>
 				</div>
 				<ng-template #displaySymbol>
-					<span>{{ currency.symbol }}</span>
-					<button
-						type="button"
-						(click)="editField('symbol')"
-						class="edit-button"
-					>
-						<i class="fas fa-edit"></i> Editar
-					</button>
+					<div class="value-container">
+						<span>{{ currency.symbol }}</span>
+						<button
+							type="button"
+							(click)="editField('symbol')"
+							class="edit-button"
+							aria-label="Editar Símbolo"
+						>
+							<i class="fas fa-edit"></i>
+						</button>
+					</div>
 				</ng-template>
 			</div>
 
+			<!-- Campo IC -->
 			<div class="form-group">
 				<label for="ConvertibilityIndex">IC:</label>
-				<!-- Modo de Edición para IC -->
 				<div
 					*ngIf="
 						editingField === 'ConvertibilityIndex';
 						else displayIC
 					"
+					class="editable-field"
 				>
 					<input
 						id="ConvertibilityIndex"
 						type="number"
-						[(ngModel)]="currency.ConvertibilityIndex"
+						[(ngModel)]="currency.ic"
 						name="ConvertibilityIndex"
 						required
 						min="0"
@@ -154,10 +173,7 @@
 						<button
 							type="button"
 							(click)="
-								saveField(
-									'ConvertibilityIndex',
-									currency.ConvertibilityIndex
-								)
+								saveField('ConvertibilityIndex', currency.ic)
 							"
 							class="save-button"
 						>
@@ -173,14 +189,17 @@
 					</div>
 				</div>
 				<ng-template #displayIC>
-					<span>{{ currency.ConvertibilityIndex }}</span>
-					<button
-						type="button"
-						(click)="editField('ConvertibilityIndex')"
-						class="edit-button"
-					>
-						<i class="fas fa-edit"></i> Editar
-					</button>
+					<div class="value-container">
+						<span>{{ currency.ic }}</span>
+						<button
+							type="button"
+							(click)="editField('ConvertibilityIndex')"
+							class="edit-button"
+							aria-label="Editar IC"
+						>
+							<i class="fas fa-edit"></i>
+						</button>
+					</div>
 				</ng-template>
 			</div>
 

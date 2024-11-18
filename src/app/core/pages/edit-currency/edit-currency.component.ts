@@ -45,6 +45,7 @@ export class EditCurrencyComponent implements OnInit {
 			.then((data) => {
 				this.currency = data;
 				this.loading = false;
+				console.log(data);
 			})
 			.catch((err) => {
 				this.error = "Error al obtener la moneda.";
@@ -77,13 +78,9 @@ export class EditCurrencyComponent implements OnInit {
 		this.editingField = fieldName;
 	}
 
-	// Método para guardar un campo específico
 	saveField(fieldName: string, value: any): void {
 		if (this.currency) {
-			// Actualizar el valor del campo en el objeto currency
 			(this.currency as any)[fieldName] = value;
-
-			// Opcional: enviar la actualización al backend inmediatamente
 			this.currencyService
 				.updateCurrency(this.currency)
 				.then(() => {
@@ -95,10 +92,8 @@ export class EditCurrencyComponent implements OnInit {
 		}
 	}
 
-	// Método para cancelar la edición de un campo específico
 	cancelEdit(): void {
 		this.editingField = null;
-		// Opcional: recargar los datos desde el backend para descartar cambios
 		if (this.currencyId) {
 			this.fetchCurrency(this.currencyId);
 		}

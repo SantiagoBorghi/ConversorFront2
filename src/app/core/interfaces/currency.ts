@@ -3,12 +3,12 @@ export interface Currency {
 	code: string;
 	name: string;
 	symbol: string;
-	ConvertibilityIndex: number;
+	ic: number;
 }
 
 export interface CurrencyForCreation {
 	code: string;
 	name: string;
 	symbol: string;
-	ConvertibilityIndex: number;
+	ic: number;
 }

@@ -32,6 +32,7 @@ export class CurrenciesICComponent implements OnInit {
 			.then((data) => {
 				this.currencies = data;
 				this.loading = false;
+				console.log(data);
 			})
 			.catch((error) => {
 				this.error = error;
