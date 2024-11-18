@@ -3,6 +3,28 @@
 	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
 <div class="main-section">
-	<h3 class="main-section-title">Admin panel</h3>
-	<button class="return-button">Return</button>
+	<h3 class="main-section-title">Currencies ICs</h3>
+	<div class="cards-container" *ngIf="!loading && !error">
+		<div class="currency-card" *ngFor="let currency of currencies">
+			<div class="card-content">
+				<div class="text-section">
+					<h4>{{ currency.name }} ({{ currency.code }})</h4>
+					<p>Símbolo: {{ currency.symbol }}</p>
+				</div>
+				<div class="ic-section">
+					<p>IC: {{ currency.ConvertibilityIndex }}</p>
+				</div>
+			</div>
+			<button class="edit-button" (click)="editCurrency(currency)">
+				Editar
+			</button>
+		</div>
+	</div>
+	<div *ngIf="loading" class="loading">
+		<p>Cargando monedas...</p>
+	</div>
+	<div *ngIf="error" class="error-message">
+		<p>{{ error }}</p>
+	</div>
+	<button class="return-button" routerLink="/home">Return</button>
 </div>

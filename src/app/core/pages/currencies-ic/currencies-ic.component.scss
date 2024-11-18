@@ -79,3 +79,63 @@
 .return-button:hover {
 	color: rgba(255, 255, 255, 0.7);
 }
+
+.loading,
+.error-message {
+	color: #ffffff;
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.error-message {
+	color: red;
+}
+
+.cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+.currency-card {
+	background: rgba(22, 22, 22, 0.356);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	padding: 1.5rem;
+	width: 250px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	color: #ffffff;
+
+	h4 {
+		margin-bottom: 0.5rem;
+		font-size: 1.5rem;
+	}
+
+	p {
+		margin-bottom: 0.5rem;
+		font-size: 1rem;
+	}
+	.edit-button {
+		align-self: flex-end;
+		background: #7a7a7a;
+		border: none;
+		border-radius: 5px;
+		padding: 0.5rem 1rem;
+		font-size: 0.9rem;
+		cursor: pointer;
+		transition: background 0.3s ease;
+
+		&:hover {
+			background: #424242;
+		}
+	}
+
+	&:hover {
+		transform: translateY(-10px);
+		box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+	}
+}

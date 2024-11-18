@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Currency } from "../interfaces/currency";
 import { API } from "../constants/api";
 import { ApiService } from "./api-service.service";
@@ -16,6 +16,29 @@ export class CurrencyService extends ApiService {
 		});
 		const data = await res.json();
 		return data;
+	}
+
+	async getCurrencyById(id: number): Promise<Currency> {
+		const res = await fetch(API + `Currency/GetCurrencyById?id=${id}`, {
+			method: "GET",
+			headers: {
+				"Content-type": "application/json",
+				Authorization: "Bearer " + this.auth.token(),
+			},
+		});
+		const data = await res.json();
+		return data;
+	}
+
+	async updateCurrency(currency: Currency): Promise<void> {
+		await fetch(API + "Currency/UpdateCurrency", {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+				Authorization: "Bearer " + this.auth.token(),
+			},
+			body: JSON.stringify(currency),
+		});
 	}
 
 	async ConvertCurrency(
