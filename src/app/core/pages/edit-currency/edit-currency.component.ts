@@ -1,4 +1,3 @@
-// src/app/core/pages/edit-currency/edit-currency.component.ts
 import { Component, OnInit, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
@@ -24,6 +23,8 @@ export class EditCurrencyComponent implements OnInit {
 	currency: Currency | null = null;
 	loading: boolean = false;
 	error: string | null = null;
+
+	editingField: string | null = null;
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
@@ -70,5 +71,36 @@ export class EditCurrencyComponent implements OnInit {
 
 	logout(): void {
 		this.auth.logout();
+	}
+
+	editField(fieldName: string): void {
+		this.editingField = fieldName;
+	}
+
+	// Método para guardar un campo específico
+	saveField(fieldName: string, value: any): void {
+		if (this.currency) {
+			// Actualizar el valor del campo en el objeto currency
+			(this.currency as any)[fieldName] = value;
+
+			// Opcional: enviar la actualización al backend inmediatamente
+			this.currencyService
+				.updateCurrency(this.currency)
+				.then(() => {
+					this.editingField = null;
+				})
+				.catch((err) => {
+					this.error = `Error al actualizar ${fieldName}.`;
+				});
+		}
+	}
+
+	// Método para cancelar la edición de un campo específico
+	cancelEdit(): void {
+		this.editingField = null;
+		// Opcional: recargar los datos desde el backend para descartar cambios
+		if (this.currencyId) {
+			this.fetchCurrency(this.currencyId);
+		}
 	}
 }

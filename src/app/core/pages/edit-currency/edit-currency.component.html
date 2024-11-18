@@ -1,7 +1,6 @@
-<!-- src/app/core/pages/edit-currency/edit-currency.component.html -->
 <header class="title-container">
-	<h1 class="title">Editar Moneda</h1>
-	<button class="LogOut" (click)="logout()">Cerrar sesión</button>
+	<h1 class="title">Coiner</h1>
+	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
 <div class="main-section">
 	<div *ngIf="loading" class="loading">
@@ -14,50 +13,185 @@
 		<form (ngSubmit)="saveChanges()">
 			<div class="form-group">
 				<label for="name">Nombre:</label>
-				<input
-					id="name"
-					type="text"
-					[(ngModel)]="currency.name"
-					name="name"
-					required
-				/>
+				<!-- Modo de Edición para Nombre -->
+				<div *ngIf="editingField === 'name'; else displayName">
+					<input
+						id="name"
+						type="text"
+						[(ngModel)]="currency.name"
+						name="name"
+						required
+					/>
+					<div class="field-buttons">
+						<button
+							type="button"
+							(click)="saveField('name', currency.name)"
+							class="save-button"
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							(click)="cancelEdit()"
+							class="cancel-button"
+						>
+							Cancelar
+						</button>
+					</div>
+				</div>
+				<ng-template #displayName>
+					<span>{{ currency.name }}</span>
+					<button
+						type="button"
+						(click)="editField('name')"
+						class="edit-button"
+					>
+						<i class="fas fa-edit"></i> Editar
+					</button>
+				</ng-template>
 			</div>
+
 			<div class="form-group">
 				<label for="code">Código:</label>
-				<input
-					id="code"
-					type="text"
-					[(ngModel)]="currency.code"
-					name="code"
-					required
-					maxlength="5"
-				/>
+				<!-- Modo de Edición para Código -->
+				<div *ngIf="editingField === 'code'; else displayCode">
+					<input
+						id="code"
+						type="text"
+						[(ngModel)]="currency.code"
+						name="code"
+						required
+						maxlength="5"
+					/>
+					<div class="field-buttons">
+						<button
+							type="button"
+							(click)="saveField('code', currency.code)"
+							class="save-button"
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							(click)="cancelEdit()"
+							class="cancel-button"
+						>
+							Cancelar
+						</button>
+					</div>
+				</div>
+				<ng-template #displayCode>
+					<span>{{ currency.code }}</span>
+					<button
+						type="button"
+						(click)="editField('code')"
+						class="edit-button"
+					>
+						<i class="fas fa-edit"></i> Editar
+					</button>
+				</ng-template>
 			</div>
+
 			<div class="form-group">
 				<label for="symbol">Símbolo:</label>
-				<input
-					id="symbol"
-					type="text"
-					[(ngModel)]="currency.symbol"
-					name="symbol"
-					required
-					maxlength="3"
-				/>
+				<!-- Modo de Edición para Símbolo -->
+				<div *ngIf="editingField === 'symbol'; else displaySymbol">
+					<input
+						id="symbol"
+						type="text"
+						[(ngModel)]="currency.symbol"
+						name="symbol"
+						required
+						maxlength="3"
+					/>
+					<div class="field-buttons">
+						<button
+							type="button"
+							(click)="saveField('symbol', currency.symbol)"
+							class="save-button"
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							(click)="cancelEdit()"
+							class="cancel-button"
+						>
+							Cancelar
+						</button>
+					</div>
+				</div>
+				<ng-template #displaySymbol>
+					<span>{{ currency.symbol }}</span>
+					<button
+						type="button"
+						(click)="editField('symbol')"
+						class="edit-button"
+					>
+						<i class="fas fa-edit"></i> Editar
+					</button>
+				</ng-template>
 			</div>
+
 			<div class="form-group">
-				<label for="ic">IC:</label>
-				<input
-					id="ic"
-					type="number"
-					[(ngModel)]="currency.ConvertibilityIndex"
-					name="ic"
-					required
-					min="0"
-				/>
+				<label for="ConvertibilityIndex">IC:</label>
+				<!-- Modo de Edición para IC -->
+				<div
+					*ngIf="
+						editingField === 'ConvertibilityIndex';
+						else displayIC
+					"
+				>
+					<input
+						id="ConvertibilityIndex"
+						type="number"
+						[(ngModel)]="currency.ConvertibilityIndex"
+						name="ConvertibilityIndex"
+						required
+						min="0"
+					/>
+					<div class="field-buttons">
+						<button
+							type="button"
+							(click)="
+								saveField(
+									'ConvertibilityIndex',
+									currency.ConvertibilityIndex
+								)
+							"
+							class="save-button"
+						>
+							Guardar
+						</button>
+						<button
+							type="button"
+							(click)="cancelEdit()"
+							class="cancel-button"
+						>
+							Cancelar
+						</button>
+					</div>
+				</div>
+				<ng-template #displayIC>
+					<span>{{ currency.ConvertibilityIndex }}</span>
+					<button
+						type="button"
+						(click)="editField('ConvertibilityIndex')"
+						class="edit-button"
+					>
+						<i class="fas fa-edit"></i> Editar
+					</button>
+				</ng-template>
 			</div>
+
+			<!-- Botones Generales -->
 			<div class="button-group">
-				<button type="submit">Guardar Cambios</button>
-				<button type="button" (click)="cancel()">Cancelar</button>
+				<button type="submit" class="save-all">
+					Guardar Todos los Cambios
+				</button>
+				<button type="button" class="cancel-all" (click)="cancel()">
+					Cancelar
+				</button>
 			</div>
 		</form>
 	</div>

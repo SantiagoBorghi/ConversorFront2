@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Currency } from "../interfaces/currency";
 import { API } from "../constants/api";
 import { ApiService } from "./api-service.service";
+
 @Injectable({
 	providedIn: "root",
 })
@@ -19,7 +20,7 @@ export class CurrencyService extends ApiService {
 	}
 
 	async getCurrencyById(id: number): Promise<Currency> {
-		const res = await fetch(API + `Currency/GetCurrencyById?id=${id}`, {
+		const res = await fetch(API + `Currency/GetCurrencyById/${id}`, {
 			method: "GET",
 			headers: {
 				"Content-type": "application/json",

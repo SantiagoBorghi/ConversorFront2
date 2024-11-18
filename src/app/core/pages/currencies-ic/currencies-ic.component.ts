@@ -12,7 +12,7 @@ import { Currency } from "../../interfaces/currency";
 	templateUrl: "./currencies-ic.component.html",
 	styleUrls: ["./currencies-ic.component.scss"],
 })
-export class CurrenciesICComponent {
+export class CurrenciesICComponent implements OnInit {
 	private authService = inject(AuthService);
 	private currencyService = inject(CurrencyService);
 	private router = inject(Router);
