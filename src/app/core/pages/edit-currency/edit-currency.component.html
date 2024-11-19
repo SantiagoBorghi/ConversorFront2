@@ -25,6 +25,7 @@
 						type="text"
 						[(ngModel)]="currency.name"
 						name="name"
+						maxlength="25"
 						required
 					/>
 					<div class="field-buttons">
@@ -84,7 +85,10 @@
 						[(ngModel)]="currency.code"
 						name="code"
 						required
-						maxlength="5"
+						maxlength="3"
+						pattern="^[A-Z]{3}$"
+						value="{{ currency.code | uppercase }}"
+						(input)="currency.code = currency.code.toUpperCase()"
 					/>
 					<div class="field-buttons">
 						<button
