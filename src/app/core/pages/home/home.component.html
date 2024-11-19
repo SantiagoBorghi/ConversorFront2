@@ -1,7 +1,9 @@
 <header class="title-container">
 	<h1 class="title">Coiner</h1>
 	<div class="subscription-container">
-		<p class="subscription-text">{{ subscription }}</p>
+		<a routerLink="/subscription-options" class="sub-link">
+			<p class="subscription-text">{{ subscription }}</p>
+		</a>
 	</div>
 	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
