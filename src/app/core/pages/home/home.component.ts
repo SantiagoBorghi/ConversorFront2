@@ -104,6 +104,7 @@ export class HomeComponent {
 					.getCurrencyIndex(this.selectedCurrencyTo1)
 					.then((ic) => ic.index),
 			};
+			console.log("DTO 1:", dto1);
 
 			const dto2 = {
 				amount: this.amount,
@@ -112,6 +113,7 @@ export class HomeComponent {
 					.getCurrencyIndex(this.selectedCurrencyTo2)
 					.then((ic) => ic.index),
 			};
+			console.log("DTO 2:", dto2);
 
 			// Llamar al backend para la primera conversión
 			const [result1, result2] = await Promise.all([
@@ -126,6 +128,8 @@ export class HomeComponent {
 					dto2.ICtoConvert
 				),
 			]);
+			console.log("Resultado 1:", result1);
+			console.log("Resultado 2:", result2);
 
 			this.convertedValue1 = result1;
 			this.convertedValue2 = result2;

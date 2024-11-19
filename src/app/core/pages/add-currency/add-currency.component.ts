@@ -39,7 +39,8 @@ export class AddCurrencyComponent {
 			!this.currency.code ||
 			!this.currency.symbol ||
 			this.currency.ic === null ||
-			this.currency.ic === undefined
+			this.currency.ic === undefined ||
+			this.currency.ic <= 0
 		) {
 			this.errorMessage = "Por favor, completa todos los campos.";
 			this.successMessage = null;

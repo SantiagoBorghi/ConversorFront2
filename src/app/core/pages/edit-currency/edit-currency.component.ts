@@ -80,6 +80,22 @@ export class EditCurrencyComponent implements OnInit {
 	}
 
 	saveField(fieldName: string, value: any): void {
+		if (value === null || value === undefined || value === "") {
+			this.error = `El campo ${fieldName} no puede estar vacío.`;
+			this.saveStatus[fieldName] = "error";
+			setTimeout(() => {
+				this.saveStatus[fieldName] = null;
+			}, 3000);
+			return;
+		}
+		if (value <= 0) {
+			this.error = `El campo ${fieldName} no puede ser negativo ni 0.`;
+			this.saveStatus[fieldName] = "error";
+			setTimeout(() => {
+				this.saveStatus[fieldName] = null;
+			}, 3000);
+			return;
+		}
 		if (this.currency) {
 			(this.currency as any)[fieldName] = value;
 			this.currencyService
