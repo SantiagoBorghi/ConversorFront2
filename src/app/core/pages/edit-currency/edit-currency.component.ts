@@ -34,7 +34,7 @@ export class EditCurrencyComponent implements OnInit {
 			if (this.currencyId) {
 				this.fetchCurrency(this.currencyId);
 			} else {
-				this.error = "ID de moneda inválido.";
+				this.error = "Invalid currency ID.";
 			}
 		});
 	}
@@ -49,7 +49,7 @@ export class EditCurrencyComponent implements OnInit {
 				console.log(data);
 			})
 			.catch((err) => {
-				this.error = "Error al obtener la moneda.";
+				this.error = "Error fetching the currency.";
 				this.loading = false;
 			});
 	}
@@ -62,7 +62,7 @@ export class EditCurrencyComponent implements OnInit {
 					this.router.navigate(["/currency-ic"]);
 				})
 				.catch((err) => {
-					this.error = "Error al actualizar la moneda.";
+					this.error = "Error updating the currency.";
 				});
 		}
 	}
@@ -81,7 +81,7 @@ export class EditCurrencyComponent implements OnInit {
 
 	saveField(fieldName: string, value: any): void {
 		if (value === null || value === undefined || value === "") {
-			this.error = `El campo ${fieldName} no puede estar vacío.`;
+			this.error = `The field ${fieldName} cannot be empty.`;
 			this.saveStatus[fieldName] = "error";
 			setTimeout(() => {
 				this.saveStatus[fieldName] = null;
@@ -89,7 +89,7 @@ export class EditCurrencyComponent implements OnInit {
 			return;
 		}
 		if (value <= 0) {
-			this.error = `El campo ${fieldName} no puede ser negativo ni 0.`;
+			this.error = `The field ${fieldName} cannot be negative or zero.`;
 			this.saveStatus[fieldName] = "error";
 			setTimeout(() => {
 				this.saveStatus[fieldName] = null;
@@ -108,7 +108,7 @@ export class EditCurrencyComponent implements OnInit {
 					}, 3000);
 				})
 				.catch((err) => {
-					this.error = `Error al actualizar ${fieldName}.`;
+					this.error = `Error updating ${fieldName}.`;
 					this.saveStatus[fieldName] = "error";
 					setTimeout(() => {
 						this.saveStatus[fieldName] = null;
@@ -127,7 +127,7 @@ export class EditCurrencyComponent implements OnInit {
 
 	deleteCurrency(): void {
 		if (this.currencyId) {
-			if (confirm("¿Está seguro de que desea eliminar esta moneda?")) {
+			if (confirm("Are you sure you want to delete this currency?")) {
 				this.loading = true;
 				this.currencyService
 					.deleteCurrency(this.currencyId)
@@ -137,12 +137,12 @@ export class EditCurrencyComponent implements OnInit {
 					})
 					.catch((err) => {
 						this.loading = false;
-						this.error = "Error al eliminar la moneda.";
+						this.error = "Error deleting the currency.";
 						console.error(err);
 					});
 			}
 		} else {
-			this.error = "ID de moneda inválido.";
+			this.error = "Invalid currency ID.";
 		}
 	}
 }

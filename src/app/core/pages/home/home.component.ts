@@ -22,13 +22,13 @@ export class HomeComponent {
 	isAdmin: boolean = false;
 
 	currencies: Currency[] = [];
-	selectedCurrencyFrom: string = ""; // Moneda a convertir
-	selectedCurrencyTo1: string = ""; // Primera moneda convertida
-	selectedCurrencyTo2: string = ""; // Segunda moneda convertida
-	amount: number = 0; // Monto a convertir
+	selectedCurrencyFrom: string = "";
+	selectedCurrencyTo1: string = "";
+	selectedCurrencyTo2: string = "";
+	amount: number = 0;
 
-	convertedValue1: number = 0; // Resultado primera conversión
-	convertedValue2: number = 0; // Resultado segunda conversión
+	convertedValue1: number = 0;
+	convertedValue2: number = 0;
 
 	loading: WritableSignal<boolean> = signal(false);
 	error: WritableSignal<string | null> = signal(null);
@@ -47,7 +47,7 @@ export class HomeComponent {
 			const role = await this.userService.getRole();
 			this.isAdmin = role === "ADMIN";
 		} catch (error) {
-			console.error("Error al verificar el rol de administrador:", error);
+			console.error("Error verifying admin role:", error);
 			this.isAdmin = false;
 		}
 	}
@@ -59,9 +59,9 @@ export class HomeComponent {
 				await this.currencyService.getAllCurrency();
 			this.currencies = data;
 		} catch (err) {
-			console.error("Error al cargar las monedas:", err);
+			console.error("Error loading currencies:", err);
 			this.error.set(
-				"No se pudieron cargar las monedas. Inténtalo más tarde."
+				"Could not load currencies. Please try again later."
 			);
 		} finally {
 			this.loading.set(false);
@@ -71,10 +71,10 @@ export class HomeComponent {
 	private async loadConvertCount(): Promise<void> {
 		try {
 			const count = await this.userService.getConvertCount();
-			console.log("Conteo de conversiones:", count);
+			console.log("Conversion count:", count);
 			this.convertCount = count;
 		} catch (err) {
-			console.error("Error al obtener el conteo de conversiones:", err);
+			console.error("Error getting conversion count:", err);
 		}
 	}
 
@@ -85,16 +85,13 @@ export class HomeComponent {
 			!this.selectedCurrencyTo2 ||
 			this.amount <= 0
 		) {
-			this.error.set(
-				"Por favor, completa todos los campos correctamente."
-			);
+			this.error.set("Please complete all fields correctly.");
 			return;
 		}
 		try {
 			this.loading.set(true);
 			this.error.set(null);
 
-			// Crear los DTOs para enviar al backend
 			const dto1 = {
 				amount: this.amount,
 				ICfromConvert: await this.currencyService
@@ -104,7 +101,6 @@ export class HomeComponent {
 					.getCurrencyIndex(this.selectedCurrencyTo1)
 					.then((ic) => ic.index),
 			};
-			console.log("DTO 1:", dto1);
 
 			const dto2 = {
 				amount: this.amount,
@@ -113,9 +109,7 @@ export class HomeComponent {
 					.getCurrencyIndex(this.selectedCurrencyTo2)
 					.then((ic) => ic.index),
 			};
-			console.log("DTO 2:", dto2);
 
-			// Llamar al backend para la primera conversión
 			const [result1, result2] = await Promise.all([
 				this.currencyService.ConvertCurrency(
 					dto1.amount,
@@ -128,16 +122,14 @@ export class HomeComponent {
 					dto2.ICtoConvert
 				),
 			]);
-			console.log("Resultado 1:", result1);
-			console.log("Resultado 2:", result2);
 
 			this.convertedValue1 = result1;
 			this.convertedValue2 = result2;
 			await this.loadConvertCount();
 		} catch (err) {
-			console.error("Error al convertir monedas:", err);
+			console.error("Error converting currencies:", err);
 			this.error.set(
-				"Error al realizar la conversión. Inténtalo nuevamente."
+				"Error performing the conversion. Please try again."
 			);
 		} finally {
 			this.loading.set(false);
@@ -150,7 +142,7 @@ export class HomeComponent {
 			this.subscription = sub; // Almacenar la suscripción
 			console.log("Suscripción:", sub);
 		} catch (error) {
-			console.error("Error al obtener la suscripción:", error);
+			console.error("Error getting subscription:", error);
 			this.subscription = "Sin suscripción";
 		}
 	}

@@ -1,10 +1,12 @@
 <header class="title-container">
-	<h1 class="title">Coiner</h1>
+	<a routerLink="/home" class="title-link">
+		<h1 class="title">Coiner</h1>
+	</a>
 	<button class="LogOut" (click)="logout()">Log out</button>
 </header>
 <div class="main-section">
 	<div *ngIf="loading" class="loading">
-		<p>Cargando moneda...</p>
+		<p>Loading currency...</p>
 	</div>
 	<div *ngIf="error" class="error-message">
 		<p>{{ error }}</p>
@@ -13,7 +15,7 @@
 		<form (ngSubmit)="saveChanges()">
 			<!-- Campo Nombre -->
 			<div class="form-group">
-				<label for="name">Nombre:</label>
+				<label for="name">Name:</label>
 				<div
 					*ngIf="editingField === 'name'; else displayName"
 					class="editable-field"
@@ -31,14 +33,14 @@
 							(click)="saveField('name', currency.name)"
 							class="save-button"
 						>
-							Guardar
+							Save
 						</button>
 						<button
 							type="button"
 							(click)="cancelEdit()"
 							class="cancel-button"
 						>
-							Cancelar
+							Cancel
 						</button>
 					</div>
 				</div>
@@ -59,19 +61,19 @@
 					class="confirmation-message"
 					*ngIf="saveStatus['name'] === 'success'"
 				>
-					✔️ Cambio guardado exitosamente.
+					✔️ Change saved successfully.
 				</div>
 				<div
 					class="confirmation-message error"
 					*ngIf="saveStatus['name'] === 'error'"
 				>
-					❌ Error al guardar el cambio.
+					❌ Error saving the change.
 				</div>
 			</div>
 
 			<!-- Campo Código -->
 			<div class="form-group">
-				<label for="code">Código:</label>
+				<label for="code">Code:</label>
 				<div
 					*ngIf="editingField === 'code'; else displayCode"
 					class="editable-field"
@@ -90,14 +92,14 @@
 							(click)="saveField('code', currency.code)"
 							class="save-button"
 						>
-							Guardar
+							Save
 						</button>
 						<button
 							type="button"
 							(click)="cancelEdit()"
 							class="cancel-button"
 						>
-							Cancelar
+							Cancel
 						</button>
 					</div>
 				</div>
@@ -118,19 +120,19 @@
 					class="confirmation-message"
 					*ngIf="saveStatus['code'] === 'success'"
 				>
-					✔️ Cambio guardado exitosamente.
+					✔️ Change saved successfully.
 				</div>
 				<div
 					class="confirmation-message error"
 					*ngIf="saveStatus['code'] === 'error'"
 				>
-					❌ Error al guardar el cambio.
+					❌ Error saving the change.
 				</div>
 			</div>
 
 			<!-- Campo Símbolo -->
 			<div class="form-group">
-				<label for="symbol">Símbolo:</label>
+				<label for="symbol">Symbol:</label>
 				<div
 					*ngIf="editingField === 'symbol'; else displaySymbol"
 					class="editable-field"
@@ -149,14 +151,14 @@
 							(click)="saveField('symbol', currency.symbol)"
 							class="save-button"
 						>
-							Guardar
+							Save
 						</button>
 						<button
 							type="button"
 							(click)="cancelEdit()"
 							class="cancel-button"
 						>
-							Cancelar
+							Cancel
 						</button>
 					</div>
 				</div>
@@ -177,13 +179,13 @@
 					class="confirmation-message"
 					*ngIf="saveStatus['symbol'] === 'success'"
 				>
-					✔️ Cambio guardado exitosamente.
+					✔️ Change saved successfully.
 				</div>
 				<div
 					class="confirmation-message error"
 					*ngIf="saveStatus['symbol'] === 'error'"
 				>
-					❌ Error al guardar el cambio.
+					❌ Error saving the change.
 				</div>
 			</div>
 
@@ -213,14 +215,14 @@
 							"
 							class="save-button"
 						>
-							Guardar
+							Save
 						</button>
 						<button
 							type="button"
 							(click)="cancelEdit()"
 							class="cancel-button"
 						>
-							Cancelar
+							Cancel
 						</button>
 					</div>
 				</div>
@@ -241,13 +243,13 @@
 					class="confirmation-message"
 					*ngIf="saveStatus['ConvertibilityIndex'] === 'success'"
 				>
-					✔️ Cambio guardado exitosamente.
+					✔️ Change saved successfully.
 				</div>
 				<div
 					class="confirmation-message error"
 					*ngIf="saveStatus['ConvertibilityIndex'] === 'error'"
 				>
-					❌ Error al guardar el cambio.
+					❌ Error saving the change.
 				</div>
 			</div>
 
@@ -259,7 +261,7 @@
 					(click)="deleteCurrency()"
 					[disabled]="loading"
 				>
-					Eliminar Moneda
+					Delete Currency
 				</button>
 				<button type="button" class="cancel-all" (click)="cancel()">
 					Go back
