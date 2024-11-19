@@ -39,7 +39,7 @@ export class RegisterComponent {
 				this.errorRegister.set(true);
 			}
 		} catch (err) {
-			console.warn("Error registrando", err);
+			console.warn("Error registering:", err);
 			this.errorRegister.set(true);
 		}
 		this.cargando.set(false);

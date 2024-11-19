@@ -28,17 +28,14 @@ export class LoginComponent {
 	async SubCheck(): Promise<void> {
 		try {
 			const subscriptionStatus = await this.userService.getSub();
-			console.log(subscriptionStatus); // Solo se llama una vez a getSub()
+			console.log(subscriptionStatus);
 			if (subscriptionStatus === "No subscription") {
 				this.router.navigate(["/subscription-options"]);
 			} else {
 				this.router.navigate(["/home"]);
 			}
 		} catch (error) {
-			console.error(
-				"Error al verificar el estado de la suscripción:",
-				error
-			);
+			console.error("Error verifying subscription status:", error);
 			this.router.navigate(["/home"]);
 		}
 	}
@@ -54,7 +51,7 @@ export class LoginComponent {
 				this.errorLogin.set(true);
 			}
 		} catch (err) {
-			console.warn("Error al iniciar sesión", err);
+			console.warn("Error signing in", err);
 			this.errorLogin.set(true);
 		} finally {
 			this.cargando.set(false);

@@ -12,7 +12,7 @@
 		minlength="7"
 	/>
 	<p *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
-		Este campo es requerido.
+		This field is required.
 	</p>
 	<input
 		type="password"
@@ -27,16 +27,16 @@
 		*ngIf="password.invalid && (password.dirty || password.touched)"
 		class="error"
 	>
-		La contraseña es obligatoria y debe tener minimo 6 caracteres.
+		The password is required and must be at least 6 characters long.
 	</p>
 	<button type="submit" [disabled]="cargando()">
 		<span *ngIf="!cargando()">Sign in</span>
 		<span *ngIf="cargando()">
-			<span class="spinner"></span> Cargando...
+			<span class="spinner"></span> Loading...
 		</span>
 	</button>
 	<p *ngIf="errorLogin()" class="myerror">
-		Error al iniciar sesión. Por favor, verifica tus credenciales.
+		Error signing in. Please check your credentials.
 	</p>
 	<p class="login-text">
 		Dont have an account?

@@ -3,11 +3,11 @@
 	<h2>Sign up</h2>
 	<input
 		type="email"
-		placeholder="Email"
-		required
-		minlength="10"
-		maxlength="35"
 		name="email"
+		id="email"
+		placeholder="Enter your email"
+		required
+		minlength="7"
 		[(ngModel)]="userForCreation.email"
 		#email="ngModel"
 	/>
@@ -15,21 +15,19 @@
 		*ngIf="email.invalid && (email.dirty || email.touched)"
 		class="myerror"
 	>
-		<p *ngIf="email.errors?.['required']">El correo es obligatorio.</p>
+		<p *ngIf="email.errors?.['required']">Email is required.</p>
 		<p *ngIf="email.errors?.['minlength']">
-			El correo debe tener al menos 10 caracteres.
-		</p>
-		<p *ngIf="email.errors?.['maxlength']">
-			El correo debe tener como máximo 35 caracteres.
+			Email must be at least 7 characters long.
 		</p>
 	</div>
 	<input
 		type="text"
-		placeholder="Username"
+		name="username"
+		id="username"
+		placeholder="Enter your username"
 		required
 		minlength="2"
 		maxlength="25"
-		name="username"
 		[(ngModel)]="userForCreation.username"
 		#username="ngModel"
 	/>
@@ -37,23 +35,22 @@
 		*ngIf="username.invalid && (username.dirty || username.touched)"
 		class="myerror"
 	>
-		<p *ngIf="username.errors?.['required']">
-			El nombre de usuario es obligatorio.
-		</p>
+		<p *ngIf="username.errors?.['required']">Username is required.</p>
 		<p *ngIf="username.errors?.['minlength']">
-			El nombre de usuario debe tener al menos 2 caracteres.
+			Username must be at least 2 characters long.
 		</p>
 		<p *ngIf="username.errors?.['maxlength']">
-			El nombre de usuario debe tener como máximo 25 caracteres.
+			Username cannot exceed 25 characters.
 		</p>
 	</div>
 	<input
 		type="password"
-		placeholder="Ingrese password del usuario"
+		name="password"
+		id="password"
+		placeholder="Enter your password"
 		required
 		minlength="6"
 		maxlength="64"
-		name="password"
 		[(ngModel)]="userForCreation.password"
 		#passwordField="ngModel"
 	/>
@@ -64,21 +61,19 @@
 		"
 		class="myerror"
 	>
-		<p *ngIf="passwordField.errors?.['required']">
-			La contraseña es obligatoria.
-		</p>
+		<p *ngIf="passwordField.errors?.['required']">Password is required.</p>
 		<p *ngIf="passwordField.errors?.['minlength']">
-			La contraseña debe tener al menos 6 caracteres.
+			Password must be at least 6 characters long.
 		</p>
 		<p *ngIf="passwordField.errors?.['maxlength']">
-			La contraseña debe tener máximo 64 caracteres.
+			Password cannot exceed 64 characters.
 		</p>
 	</div>
 	<button type="submit" [disabled]="cargando()">
-		{{ cargando() ? "Cargando..." : "Sign up" }}
+		{{ cargando() ? "Loading..." : "Sign up" }}
 	</button>
 	<p *ngIf="errorRegister()" class="myerror">
-		Error al registrarse. Por favor, intenta nuevamente.
+		Error registering. Please try again.
 	</p>
 
 	<p class="signin-text">
